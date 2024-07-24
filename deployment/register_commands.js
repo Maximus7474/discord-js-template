@@ -40,7 +40,7 @@ try {
 
     if(process.env.MAIN_GUILD && guildStack && guildStack.length > 0) {
         rest.put(
-            Routes.applicationGuildCommands(userId, main_guild),
+            Routes.applicationGuildCommands(userId, process.env.MAIN_GUILD),
             { body: guildStack },
         ).then(response => {
             logger.success(`Successfully registered ${response.length} guild application (/) command${response.length > 1?"s":""}.`);
