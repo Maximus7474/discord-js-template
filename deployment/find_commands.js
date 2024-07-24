@@ -1,28 +1,74 @@
-const fs = require('fs')
-const log = new require('../logger.js')
-const logger = new log("Command loader")
+const fs = require('fs');
+const path = require('path');
+const log = new require('../src/utils/logger.js');
+const logger = new log("Command loader");
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const path_to_commands = __dirname + '/../../commands/'
+const path_to_commands = path.join(__dirname, '/../src/commands/');
+
+function getAllJsFiles(dirPath, arrayOfFiles) {
+    const files = fs.readdirSync(dirPath);
+
+    arrayOfFiles = arrayOfFiles || [];
+
+    files.forEach((file) => {
+        if (fs.statSync(path.join(dirPath, file)).isDirectory()) {
+            arrayOfFiles = getAllJsFiles(path.join(dirPath, file), arrayOfFiles);
+        } else if (file.endsWith('.js')) {
+            arrayOfFiles.push(path.join(dirPath, file));
+        }
+    });
+
+    return arrayOfFiles;
+}
 
 module.exports = () => {
-    const commandFiles = fs.readdirSync(path_to_commands).filter(file => file.endsWith('.js'));
+    const commandFiles = getAllJsFiles(path_to_commands);
 
-    let stack = []
-    let commands = {}
+    let guildCommands = {}
+    let globalCommands = {}
+    let guildStack = [];
+    let globalStack = [];
 
-    for (const command of commandFiles) {
-        const command_loaded = require(path_to_commands + command)
-        if (!command_loaded) { logger.error(`${command} not valid`); continue}
-        if (typeof command_loaded.execute === 'undefined' || typeof command_loaded.execute !== 'function') { logger.error(`${command} does not have the execute function`); continue }
-        if (command_loaded.register_command instanceof SlashCommandBuilder == false) { logger.error(`${command} does not have the register_command SlashcommandBuilder instance`);continue}
+    for (const filePath of commandFiles) {
+        const command_loaded = require(filePath);
+        const commandName = path.basename(filePath);
 
-        if (Object.keys(commands).includes(command_loaded.register_command.name)) { logger.warning(`Two or more commands share the name ${command_loaded.register_command.name}`);continue}
+        if (!command_loaded) {
+            logger.error(`${commandName} not valid`);
+            continue;
+        }
+        if (typeof command_loaded.execute === 'undefined' || typeof command_loaded.execute !== 'function') {
+            logger.error(`${commandName} does not have the execute function`);
+            continue;
+        }
+        if (!(command_loaded.register_command instanceof SlashCommandBuilder)) {
+            logger.error(`${commandName} does not have the register_command SlashCommandBuilder instance`);
+            continue;
+        }
 
-        commands[command_loaded.register_command.name] = command_loaded
-        stack.push(command_loaded.register_command)
+        if (command_loaded.guildOnly === 'undefined' || typeof command_loaded.guildOnly !== 'boolean' || !command_loaded.guildOnly) {
+            if (Object.keys(globalCommands).includes(command_loaded.register_command.name)) {
+                logger.warning(`Two or more global commands share the name ${command_loaded.register_command.name}`);
+                continue;
+            }
 
-        logger.success(`Successfully loaded ${command}`)
+            globalCommands[command_loaded.register_command.name] = command_loaded;
+            globalStack.push(command_loaded.register_command);
+
+            logger.success(`Successfully loaded ${commandName} (global)`);
+        } else {
+            if (Object.keys(guildCommands).includes(command_loaded.register_command.name)) {
+                logger.warning(`Two or more guild commands share the name ${command_loaded.register_command.name}`);
+                continue;
+            }
+
+            guildCommands[command_loaded.register_command.name] = command_loaded;
+            guildStack.push(command_loaded.register_command);
+
+            logger.success(`Successfully loaded ${commandName} (guild)`);
+        }
     }
-    logger.info("Commands loaded")
-    return stack
-}
+
+    logger.info(`Commands loaded: Guild (${guildStack.length}), Global (${globalStack.length})`);
+    return { globalStack, guildStack };
+};
