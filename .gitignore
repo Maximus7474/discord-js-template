@@ -107,3 +107,6 @@ dist
 
 # Used for Snyk Security 
 .dccache
+
+# Used for sqlite3 database files
+*.db
