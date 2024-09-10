@@ -4,7 +4,9 @@
     "description": "A new release of my Discord.js Template Supporting Discord.js 14 ",
     "main": "src/main.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha 'test/*.js'",
+        "test-lint": "mocha 'test/lint-test.js'",
+        "lint": "eslint src/**/*.js",
         "start": "node src/main.js",
         "deploy": "node deployment/register_commands.js"
     },
