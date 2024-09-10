@@ -1,9 +1,8 @@
-const Discord = require('discord.js')
-require('dotenv').config()
-const assert = require('assert')
-const find_events = require('./utils/initialisation/find_events')
-const find_commands = require('./utils/initialisation/find_commands')
-const register_commands = require('./utils/initialisation/register_commands')
+const Discord = require('discord.js');
+require('dotenv').config();
+const assert = require('assert');
+const find_events = require('./utils/initialisation/find_events');
+const setup_commands = require('./utils/initialisation/setup_commands');
 
 assert(process.env.TOKEN, "A Discord Token for your bot is required ! Please go to your application page to get it! Set your token then as an enviormental variable with the TOKEN variable name!")
 
@@ -21,12 +20,11 @@ const client = new Discord.Client({
     ]
 });
 
-find_events(client)
+find_events(client);
 
-const commands = find_commands(client)
+setup_commands(client);
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);
 
-client.once(Discord.Events.ClientReady,(client)=>{
-    register_commands(client,commands)
-})
+client.once(Discord.Events.ClientReady, (client)=>{
+});
