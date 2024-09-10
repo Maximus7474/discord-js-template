@@ -1,7 +1,7 @@
 {
     "name": "discord-js-template",
-    "version": "3.0.0",
-    "description": "A new release of my Discord.js Template Supporting Discord.js 14 ",
+    "version": "3.2.0",
+    "description": "An adaptation of Furious Feline's Discord.js Template, updated and customized by Maximus7474.",
     "main": "src/main.js",
     "scripts": {
         "test": "mocha 'test/*.js'",
@@ -12,18 +12,26 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/FissionFeline/discord-js-template.git"
+        "url": "git+https://github.com/Maximus7474/discord-js-template.git"
     },
     "keywords": [
         "Discord",
-        "Discord.js"
+        "Discord.js",
+        "Fork",
+        "Template"
     ],
-    "author": "Furious Feline",
+    "author": "Maximus7474",
+    "contributors": [
+        {
+            "name": "Furious Feline",
+            "url": "https://github.com/FissionFeline"
+        }
+    ],
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/FissionFeline/discord-js-template/issues"
+        "url": "https://github.com/Maximus7474/discord-js-template-fork/issues"
     },
-    "homepage": "https://github.com/FissionFeline/discord-js-template#readme",
+    "homepage": "https://github.com/Maximus7474/discord-js-template-fork#readme",
     "dependencies": {
         "assert": "^2.0.0",
         "colors": "^1.4.0",
