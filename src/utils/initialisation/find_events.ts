@@ -11,7 +11,7 @@ export default (client: Client): void => {
     const events = fs.readdirSync(path_to_events).filter(file => file.endsWith('.ts'));
 
     for (const element of events) {
-        const element_loaded: Event = require(path.join(path_to_events, element));
+        const element_loaded: Event = require(path.join(path_to_events, element)).default;
 
         if (!element_loaded.type) {
             logger.error(`Failed to load ${element} type`);

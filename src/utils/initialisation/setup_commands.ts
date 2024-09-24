@@ -14,7 +14,7 @@ export default (client: Client): void => {
     client.commands = {} as Record<string, Command>;
 
     for (const command of commandFiles) {
-        const command_loaded: Command | undefined = require(path.join(path_to_commands, command));
+        const command_loaded: Command | undefined = require(path.join(path_to_commands, command)).default;
 
         if (!command_loaded) {
             logger.error(`${command} is not valid`);
