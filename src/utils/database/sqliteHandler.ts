@@ -1,17 +1,16 @@
-const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
+import sqlite3 from 'sqlite3';
+import fs from 'fs';
+import Logger from '../logger';
 
-const log = new require('../logger.js')
-const logger = new log("sqlite")
-
+const logger = new Logger("sqlite");
 let initialized = false;
 
 const initializeDatabase = () => {
     const db = new sqlite3.Database(`./data.db`);
-    
+
     const sqlScript = fs.readFileSync('./src/utils/database/base.sql', 'utf8');
     db.serialize(() => {
-        db.exec(sqlScript, function(err) {
+        db.exec(sqlScript, (err) => {
             if (err) {
                 logger.error('Error initializing database:', err.message);
             } else {
@@ -24,7 +23,7 @@ const initializeDatabase = () => {
     db.close();
 };
 
-const waitForInitialization = () => {
+const waitForInitialization = (): Promise<void> => {
     return new Promise((resolve) => {
         const checkInterval = setInterval(() => {
             if (initialized) {
@@ -35,9 +34,9 @@ const waitForInitialization = () => {
     });
 };
 
-const executeStatement = async (sql, params = []) => {
+const executeStatement = async (sql: string, params: any[] = []): Promise<number | undefined> => {
     if (!initialized) await waitForInitialization();
-    
+
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(`./data.db`);
         db.run(sql, params, function (err) {
@@ -53,7 +52,12 @@ const executeStatement = async (sql, params = []) => {
     });
 };
 
-const executeTransaction = async (statements) => {
+interface Statement {
+    sql: string;
+    params?: any[];
+}
+
+const executeTransaction = async (statements: Statement[]): Promise<boolean> => {
     if (!initialized) await waitForInitialization();
 
     return new Promise((resolve, reject) => {
@@ -85,10 +89,14 @@ const executeTransaction = async (statements) => {
     });
 };
 
-const executeQuery = async (sql, params = [], type = 'get') => {
+const executeQuery = async (sql: string, params: any[] = [], type: 'get' | 'all' = 'get'): Promise<any> => {
     if (!initialized) await waitForInitialization();
 
-    if (type !== 'get' && type !== 'all') return logger.warn('Incorrect argument for executeQuery type argument');
+    if (type !== 'get' && type !== 'all') {
+        logger.warn('Incorrect argument for executeQuery type argument');
+        return Promise.reject('Invalid query type');
+    }
+    
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(`./data.db`);
         db[type](sql, params, function (err, row) {
@@ -104,7 +112,7 @@ const executeQuery = async (sql, params = [], type = 'get') => {
     });
 };
 
-module.exports = {
+export {
     initializeDatabase,
     executeStatement,
     executeTransaction,
