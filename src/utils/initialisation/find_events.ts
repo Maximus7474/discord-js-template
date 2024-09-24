@@ -2,15 +2,10 @@ import fs from 'fs';
 import Logger from '../logger';
 import { Client } from 'discord.js';
 import path from 'path';
+import { Event } from '../interfaces/interfaces';
 
 const logger = new Logger("Event loader");
 const path_to_events = path.join(__dirname, '../../events/');
-
-interface Event {
-    type: 'on' | 'once';
-    event: string;
-    call: (client: Client, ...args: any[]) => void;
-}
 
 export default (client: Client): void => {
     const events = fs.readdirSync(path_to_events).filter(file => file.endsWith('.ts'));

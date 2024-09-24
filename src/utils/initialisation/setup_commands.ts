@@ -3,14 +3,10 @@ import Logger from '../logger';
 import { Client } from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import path from 'path';
+import { Command } from '../interfaces/interfaces';
 
 const logger = new Logger("Command loader");
 const path_to_commands = path.join(__dirname, '../../commands/');
-
-interface Command {
-    execute: (client: Client, ...args: any[]) => void;
-    register_command: SlashCommandBuilder;
-}
 
 export default (client: Client): void => {
     const commandFiles = fs.readdirSync(path_to_commands).filter(file => file.endsWith('.ts'));
