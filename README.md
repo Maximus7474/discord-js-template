@@ -1,5 +1,6 @@
 # discord-js-template
 This is my template for most of my discord.js bots, feel free to use!
+You can also use the [typescript template](https://github.com/Maximus7474/discord-js-template/tree/typescript-build).
 
 ## Setup
 Copy the `.env.example` file to `.env`
