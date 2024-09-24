@@ -17,19 +17,19 @@ class Logger {
     }
 
     info(...args: any[]): void {
-        console.log(this.formatMessage('INFO'), args);
+        console.log(this.formatMessage('INFO'), ...args);
     }
 
     success(...args: any[]): void {
-        console.log(this.formatMessage('SUCCESS'), args);
+        console.log(this.formatMessage('SUCCESS'), ...args);
     }
 
     warn(...args: any[]): void {
-        console.warn(this.formatMessage('WARN'), args);
+        console.warn(this.formatMessage('WARN'), ...args);
     }
 
     error(...args: any[]): void {
-        console.error(this.formatMessage('ERROR'), args);
+        console.error(this.formatMessage('ERROR'), ...args);
     }
 }
 
