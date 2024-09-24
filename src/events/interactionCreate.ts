@@ -31,10 +31,13 @@ export default {
                 }).catch(() => { });
             }
         } else {
-            return await interactionHandler(client, interaction)
-                .catch((err) => {
-                    logger.error(`Interaction handler had issue handling interaction ${interaction.customId} ${err}`);
-                });
+            try {
+                await interactionHandler(client, interaction);
+            } catch (err) {
+                const interactionId = 'customId' in interaction ? interaction.customId : 'unknown interaction';
+                logger.error(`Interaction handler had an issue handling interaction ${interactionId}: ${err}`);
+            }
+            return
         }
     }
 };
