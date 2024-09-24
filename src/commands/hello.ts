@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { Client, CommandInteraction } from 'discord.js';
+import { Command } from '../utils/interfaces/interfaces';
 
-export default {
-    /* Set to true if it should only be available to guilds specified in the .env */
+const helloCommand: Command = {
     guildOnly: false,
     register_command: new SlashCommandBuilder()
         .setName('hello')
@@ -11,3 +11,5 @@ export default {
         return interaction.reply({ content: `World!`, ephemeral: true });
     }
 };
+
+export default helloCommand;
