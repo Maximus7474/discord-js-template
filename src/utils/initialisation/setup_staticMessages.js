@@ -28,17 +28,21 @@ module.exports = {
         for (const element of events) {
             const loaded_element = require(path_to_events + element);
     
-            if (typeof loaded_element.customId !== 'string') {
+            if (typeof loaded_element.customId !== 'string' && !Array.isArray(loaded_element.customId)) {
                 logger.warn(element, "doesn't have a custom id, it will be skipped.");
                 continue;
             }
 
-            if (callbacks[loaded_element.customId]) {
-                logger.error('Interaction with ID', loaded_element.customId, 'is already registered, it cannot be added!');
-                continue;
-            }
+            let customIds = loaded_element.customId;
+            if (!Array.isArray(customIds)) customIds = [customIds];
 
-            callbacks[loaded_element.customId] = loaded_element.callback
+            customIds.forEach(id => {
+                if (callbacks[id]) {
+                    logger.error('Interaction with ID', id, 'from', element.split('.')[0], 'is already registered, it cannot be added!');
+                } else {
+                    callbacks[id] = loaded_element.callback
+                }
+            });
             
         }
 
