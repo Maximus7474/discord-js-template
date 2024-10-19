@@ -5,9 +5,12 @@ const logger = new log("Interaction Handler");
 
 const callbacks = GetInteractionHandlersForStaticMessages();
 
-module.exports = async (client,interaction) =>{
+module.exports = async (client,interaction) => {
+    const { customId } = interaction;
+
     if (typeof callbacks[customId] === 'function') {
         logger.info('Running callbacks', customId);
+        
         return await callbacks[customId](client, interaction);
     }
 }
