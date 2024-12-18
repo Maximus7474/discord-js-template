@@ -1,6 +1,6 @@
 {
     "name": "discord-js-template",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "description": "An adaptation of Furious Feline's Discord.js Template, updated and customized by Maximus7474.",
     "main": "src/main.js",
     "scripts": {
