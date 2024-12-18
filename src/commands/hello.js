@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     /* Set to true if it should only be available to guilds specified in the .env */

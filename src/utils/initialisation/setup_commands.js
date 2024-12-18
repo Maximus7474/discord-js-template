@@ -1,7 +1,7 @@
 const fs = require('fs')
 const log = new require('../logger.js')
 const logger = new log("Command loader")
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const path_to_commands = __dirname + '/../../commands/'
 
 module.exports = (client) => {
