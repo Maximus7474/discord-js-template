@@ -2,6 +2,42 @@
 This is my template for most of my discord.js bots, feel free to use!
 You can also use the [typescript template](https://github.com/Maximus7474/discord-js-template/tree/typescript-build).
 
+## Features
+1. SQLite Database handler (located in `./src/utils/database/`):
+    - `executeStatement(sqlquery: string, params?: string[])`
+        - execute an update query or an insert query
+    - `executeTransaction({sqlquery: string, params?: string[]}[])`
+        - execute multiple statements either update or insert
+    - `executeQuery(sqlquery: string, params?: string[], action?: "get"|"all")`
+        - execute a query to return one entry or all entries, will default to using `"get"` if not specified.
+        - `"get"` will return a single line that satisfies the query and parameters
+        - `"all"` will return all lines that satisfy the query and parameters
+
+2. Application commands (located in `./src/commands/`):
+    - You can set the command to be restricted to the main guild, requires that the `MAIN_GUILD` field be set in the `.env`
+    - To define a new command you only need to create a new file, it's export has to be the following structure:
+    ```js
+    guildOnly: boolean,
+    register_command: SlashCommandBuilder, // from discord.js
+    execute: async function (client: Client, interaction: ChatInputCommandInteraction) {}, // Client & ChatInputCommandInteraction from discord.js
+    ```
+
+3. Event handlers (located in `./src/events/`):
+    - To define a new event handler you only need to create a new file, it's export has to be the following structure:
+    ```js
+    event: Events enum, // from discord.js
+    type: "once"|"on",
+    call: async function (client: Client, ...) {}, // Client from discord.js, ... args relating to the event check discord.js documentation
+    ```
+
+4. Static Message handler (located in `./src/utils/staticMessages/`):
+    - To define a new static message you only need to create a new file, it's export has to be the following structure:
+    ```js
+    customId: string[],
+    setup: async function (client: Client) {}, // Client from discord.js
+    callback: async function (client: Client, interaction: CommandInteraction) {}, // Client & CommandInteraction from discord.js
+    ```
+
 ## Setup
 Copy the `.env.example` file to `.env`
 ```bash
