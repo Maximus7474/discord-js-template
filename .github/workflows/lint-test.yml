@@ -13,15 +13,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4.0.0
+      with:
+        version: 9
+    
+    - name: Run pnpm install
+      run: pnpm install
+
+    - name: Setup node
       uses: actions/setup-node@v3
       with:
-        node-version: '18'      
-
-    - name: Install dependencies
-      run: npm install
+        node-version: 18
+        cache: 'pnpm'
+        cache-dependency-path: 'pnpm-lock.yaml'
 
     - name: Run ESLint tests
-      run: npm run test-lint
+      run: pnpm run test-lint
       env:
         CI: true
