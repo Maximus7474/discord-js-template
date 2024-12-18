@@ -1,4 +1,4 @@
-const log = new require('../logger.js');
+const log = new require('../utils/logger.js');
 const logger = new log("Static Message");
 
 module.exports = {

@@ -30,7 +30,7 @@ You can also use the [typescript template](https://github.com/Maximus7474/discor
     call: async function (client: Client, ...) {}, // Client from discord.js, ... args relating to the event check discord.js documentation
     ```
 
-4. Static Message handler (located in `./src/utils/staticMessages/`):
+4. Static Message handler (located in `./src/staticMessages/`):
     - To define a new static message you only need to create a new file, it's export has to be the following structure:
     ```js
     customId: string[],

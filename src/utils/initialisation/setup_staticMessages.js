@@ -1,7 +1,7 @@
 const fs = require('fs')
 const log = new require('../logger.js')
 const logger = new log("Static Message loader")
-const path_to_events = __dirname + '/../staticMessages/'
+const path_to_events = __dirname + '/../../staticMessages/'
 
 module.exports = {
     InitializeStaticMessages (client) {
