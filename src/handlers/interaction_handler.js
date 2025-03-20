@@ -8,9 +8,7 @@ const callbacks = GetInteractionHandlersForStaticMessages();
 module.exports = async (client,interaction) => {
     const { customId } = interaction;
 
-    if (typeof callbacks[customId] === 'function') {
-        logger.info('Running callbacks', customId);
-        
+    if (typeof callbacks[customId] === 'function') {        
         return await callbacks[customId](client, interaction);
     }
 }
