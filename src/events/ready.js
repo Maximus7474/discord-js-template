@@ -4,7 +4,11 @@ const logger = new log("ready")
 module.exports = {
     event: Discord.Events.ClientReady,
     type: "once",
+    /**
+     * 
+     * @param {Discord.Client} client 
+     */
     async call(client) {
-        logger.success(`Connected ! You're in as ${client.user.username} currently serving ${client.guilds.cache.size} Server(s)`)
+        logger.success(`Logged in & connected as ${client.user.username}, serving ${client.guilds.cache.size} server(s)`)
     }
 }

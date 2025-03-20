@@ -7,8 +7,14 @@ const interaction_handler = require('../handlers/interaction_handler')
 module.exports = {
     event: Discord.Events.InteractionCreate,
     type: "on",
-    async call(client,interaction) {
+    /**
+     * @param {Discord.Client} client 
+     * @param {Discord.Interaction} interaction 
+     */
+    async call(client, interaction) {
+
         if(interaction.isChatInputCommand()) {
+
             if(!Object.keys(client.commands).includes(interaction.commandName)) {
                 logger.warn(`Command ${interaction.commandName} not found or loaded`);
 
