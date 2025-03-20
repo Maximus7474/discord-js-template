@@ -16,25 +16,41 @@
     - To define a new command you only need to create a new file, it's export has to be the following structure:
     ```js
     guildOnly: boolean,
-    register_command: SlashCommandBuilder, // from discord.js
-    execute: async function (client: Client, interaction: ChatInputCommandInteraction) {}, // Client & ChatInputCommandInteraction from discord.js
+    // from discord.js
+    register_command: SlashCommandBuilder,
+    // Client & ChatInputCommandInteraction from discord.js
+    execute: async function (client: Client, interaction: ChatInputCommandInteraction): void
     ```
+    - External Documentation:
+      - [SlashCommandBuilder](https://discord.js.org/docs/packages/builders/1.9.0/SlashCommandBuilder:Class)
+      - [Client](https://discord.js.org/docs/packages/discord.js/14.18.0/Client:Class)
+      - [ChatInputCommandInteraction](https://discord.js.org/docs/packages/discord.js/14.18.0/ChatInputCommandInteraction:Class)
 
 3. Event handlers (located in `./src/events/`):
     - To define a new event handler you only need to create a new file, it's export has to be the following structure:
     ```js
-    event: Events enum, // from discord.js
+    // from discord.js
+    event: Events enum,
     type: "once"|"on",
-    call: async function (client: Client, ...) {}, // Client from discord.js, ... args relating to the event check discord.js documentation
+    // Client from discord.js, ... args relating to the event check discord.js documentation
+    call: async function (client: Client, ...): void
     ```
+    - External Documentation:
+      - [Events](https://discord.js.org/docs/packages/discord.js/14.18.0/Events:Enum)
+      - [Client](https://discord.js.org/docs/packages/discord.js/14.18.0/Client:Class)
 
 4. Static Message handler (located in `./src/staticMessages/`):
     - To define a new static message you only need to create a new file, it's export has to be the following structure:
     ```js
     customId: string[],
-    setup: async function (client: Client) {}, // Client from discord.js
-    callback: async function (client: Client, interaction: CommandInteraction) {}, // Client & CommandInteraction from discord.js
+    // Client from discord.js
+    setup: async function (client: Client) {},
+    // Client & CommandInteraction from discord.js
+    callback: async function (client: Client, interaction: CommandInteraction): void
     ```
+    - External Documentation:
+      - [Client](https://discord.js.org/docs/packages/discord.js/14.18.0/Client:Class)
+      - [CommandInteraction](https://discord.js.org/docs/packages/discord.js/14.18.0/CommandInteraction:Class) _Could be button, dropdown, etc... types of interaction_
 
 ## Setup
 Copy the `.env.example` file to `.env`
