@@ -24,6 +24,8 @@ const initializeDatabase = () => {
     db.close();
 };
 
+initializeDatabase();
+
 const waitForInitialization = () => {
     return new Promise((resolve) => {
         const checkInterval = setInterval(() => {
