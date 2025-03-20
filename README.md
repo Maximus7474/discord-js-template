@@ -2,11 +2,11 @@
 
 ## Features
 1. SQLite Database handler (located in `./src/utils/database/`):
-    - `executeStatement(sqlquery: string, params?: string[]) => Promise<number|string|Error>`
+    - `executeStatement(sqlquery: string, params?: string[]): Promise<number|string|Error>`
         - execute an update query or an insert query
-    - `executeTransaction({sqlquery: string, params?: string[]}[]) => Promise<boolean|Error>`
+    - `executeTransaction({sqlquery: string, params?: string[]}[]): Promise<boolean|Error>`
         - execute multiple statements either update or insert
-    - `executeQuery(sqlquery: string, params?: string[], action?: "get"|"all") => Promise<object|object[]|Error>`
+    - `executeQuery(sqlquery: string, params?: string[], action?: "get"|"all"): Promise<object|object[]|Error>`
         - execute a query to return one entry or all entries, will default to using `"get"` if not specified.
         - `"get"` will return a single line that satisfies the query and parameters
         - `"all"` will return all lines that satisfy the query and parameters
