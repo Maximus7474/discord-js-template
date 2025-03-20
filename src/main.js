@@ -4,7 +4,6 @@ const assert = require('assert');
 const find_events = require('./utils/initialisation/find_events');
 const setup_commands = require('./utils/initialisation/setup_commands');
 const { InitializeStaticMessages } = require('./utils/initialisation/setup_staticMessages');
-const { initializeDatabase } = require('./utils/database/sqliteHandler');
 
 assert(process.env.TOKEN, "A Discord Token for your bot is required ! Please go to your application page to get it! Set your token then as an enviormental variable with the TOKEN variable name!")
 
@@ -21,8 +20,6 @@ const client = new Discord.Client({
         Discord.Partials.Reaction
     ]
 });
-
-initializeDatabase();
 
 find_events(client);
 
