@@ -6,6 +6,14 @@ const logger = new log("sqlite")
 
 let initialized = false;
 
+/**
+ * Initializes the SQLite database by executing the base schema SQL script.
+ *
+ * Reads and executes `base.sql` to create necessary tables and structures.
+ * Logs success or errors during initialization.
+ *
+ * @returns {void}
+ */
 const initializeDatabase = () => {
     const db = new sqlite3.Database(`./data.db`);
     
@@ -37,6 +45,17 @@ const waitForInitialization = () => {
     });
 };
 
+/**
+ * Executes a SQL statement on the SQLite database.
+ *
+ * Opens a connection, runs the statement with optional parameters,
+ * and returns either the last inserted ID or number of affected rows.
+ *
+ * @async
+ * @param {string} sql - The SQL query string to execute (e.g., INSERT, UPDATE, DELETE).
+ * @param {Array<any>} [params=[]] - Optional parameters to bind to the SQL statement.
+ * @returns {Promise<number>} - Resolves with `lastID` (for INSERT) or `changes` (for UPDATE/DELETE).
+ */
 const executeStatement = async (sql, params = []) => {
     if (!initialized) await waitForInitialization();
     
@@ -55,6 +74,15 @@ const executeStatement = async (sql, params = []) => {
     });
 };
 
+/**
+ * Executes multiple SQL statements in a single SQLite transaction.
+ *
+ * Each statement is executed sequentially. If any statement fails, the transaction is rolled back.
+ *
+ * @async
+ * @param {Array<{ sql: string, params?: Array<any> }>} statements - An array of SQL statements with optional parameters to execute as a single transaction.
+ * @returns {Promise<boolean>} - Resolves with `true` if the transaction is committed successfully.
+ */
 const executeTransaction = async (statements) => {
     if (!initialized) await waitForInitialization();
 
@@ -87,6 +115,17 @@ const executeTransaction = async (statements) => {
     });
 };
 
+/**
+ * Executes a SQL SELECT query on the SQLite database.
+ *
+ * Supports retrieving either a single row (`get`) or multiple rows (`all`).
+ *
+ * @async
+ * @param {string} sql - The SQL SELECT query to execute.
+ * @param {Array<any>} [params=[]] - Optional parameters to bind to the SQL query.
+ * @param {'get'|'all'} [type='get'] - The type of query result: `'get'` for a single row or `'all'` for an array of rows.
+ * @returns {Promise<any|any[]>} - Resolves with a single row object (for `'get'`) or an array of row objects (for `'all'`).
+ */
 const executeQuery = async (sql, params = [], type = 'get') => {
     if (!initialized) await waitForInitialization();
 
