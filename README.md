@@ -1,7 +1,7 @@
 # discord-js-template
 
 <details>
-<summary><h1>Features</h1></summary>
+<summary><p style="font-size: 24px">Features</p></summary>
 1. SQLite Database handler (located in `./src/utils/database/`):
     - `executeStatement(sqlquery: string, params?: string[]): Promise<number|string|Error>`
         - execute an update query or an insert query
