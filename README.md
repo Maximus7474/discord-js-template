@@ -1,7 +1,7 @@
 # discord-js-template
 
 <details>
-<summary><p style="font-size: 24px">Features</p></summary>
+<summary><span style="font-size: 24px">Feature List & Documentation</span></summary>
 1. SQLite Database handler (located in `./src/utils/database/`):
     - `executeStatement(sqlquery: string, params?: string[]): Promise<number|string|Error>`
         - execute an update query or an insert query
@@ -64,6 +64,13 @@ Open it with your favorite editor, Nano, Vim or Emacs.
 
 Replace the `TOKEN` in the `.env` file with your own Authentication Token given to you by Discord in their portal 
 Replace the `MAIN_GUIlD` in the `.env` file with the discord ID of your main discord guild 
+
+Once your discord bot is generated and the token inserted, you will need to run the deployment command so that the slashcommands are all registered to Discords API.
+This is done via `npm` or `pnpm` depending on your prefference, running the `deploy` script:
+```bash
+npm run deploy
+pnpm run deploy
+```
 
 ## DO NOT MAKE THE .env FILE PUBLIC
 By default, `.env` is git ignored (meaning it is ignored by git). If you disable this, there can be huge security risks such as
