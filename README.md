@@ -1,6 +1,7 @@
 # discord-js-template
 
-## Features
+<details>
+<summary>## Features</summary>
 1. SQLite Database handler (located in `./src/utils/database/`):
     - `executeStatement(sqlquery: string, params?: string[]): Promise<number|string|Error>`
         - execute an update query or an insert query
@@ -51,6 +52,7 @@
     - External Documentation:
       - [Client](https://discord.js.org/docs/packages/discord.js/14.18.0/Client:Class)
       - [CommandInteraction](https://discord.js.org/docs/packages/discord.js/14.18.0/CommandInteraction:Class) _Could be button, dropdown, etc... types of interaction_
+</details>
 
 ## Setup
 Copy the `.env.example` file to `.env`
