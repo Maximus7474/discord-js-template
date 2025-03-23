@@ -1,7 +1,11 @@
 # discord-js-template
 
+### Credits:
+- This template is based on Fission Feline's [Discord JS template](https://github.com/FissionFeline/discord-js-template)
+
 <details>
 <summary><span style="font-size: 24px">Feature List & Documentation</span></summary>
+    
 1. SQLite Database handler (located in `./src/utils/database/`):
     - `executeStatement(sqlquery: string, params?: string[]): Promise<number|string|Error>`
         - execute an update query or an insert query
