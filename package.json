@@ -4,10 +4,9 @@
     "description": "An adaptation of Furious Feline's Discord.js Template, updated and customized by Maximus7474.",
     "main": "src/main.js",
     "scripts": {
-        "test": "mocha 'test/*.js'",
-        "test-lint": "mocha 'test/lint-test.js'",
-        "lint": "eslint src/**/*.js",
-        "start": "node src/main.js",
+        "build": "tsc",
+        "start": "node build/index.js",
+        "dev": "nodemon -L",
         "deploy": "node deployment/register_commands.js"
     },
     "repository": {
