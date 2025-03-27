@@ -1,9 +1,11 @@
-const Discord = require('discord.js');
-require('dotenv').config();
-const assert = require('assert');
-const find_events = require('./utils/initialisation/find_events');
-const setup_commands = require('./utils/initialisation/setup_commands');
-const { InitializeStaticMessages } = require('./utils/initialisation/setup_staticMessages');
+import Discord from 'discord.js';
+import dotenv from 'dotenv';
+import assert from 'assert';
+import find_events from './utils/initialisation/find_events';
+import setup_commands from './utils/initialisation/setup_commands';
+import { InitializeStaticMessages } from './utils/initialisation/setup_staticMessages';
+
+dotenv.config();
 
 assert(process.env.TOKEN, "A Discord Token for your bot is required ! Please go to your application page to get it! Set your token then as an enviormental variable with the TOKEN variable name!")
 
