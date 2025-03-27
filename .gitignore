@@ -110,7 +110,3 @@ dist
 
 # Used for sqlite3 database files
 *.db
-
-# Used to ignore lock file for pnpm & npm
-package-lock.json
-pnpm-lock.yaml
