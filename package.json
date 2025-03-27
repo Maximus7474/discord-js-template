@@ -31,6 +31,16 @@
         "url": "https://github.com/Maximus7474/discord-js-template-fork/issues"
     },
     "homepage": "https://github.com/Maximus7474/discord-js-template-fork#readme",
+    "devDependencies": {
+        "@types/node": "^20.14.12",
+        "@types/node-fetch": "^2.6.12",
+        "concurrently": "^9.1.2",
+        "eslint": "^9.19.0",
+        "nodemon": "^3.1.9",
+        "prettier": "3.4.2",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.3"
+    },
     "dependencies": {
         "assert": "^2.1.0",
         "colors": "^1.4.0",
